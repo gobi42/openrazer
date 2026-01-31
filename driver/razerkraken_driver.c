@@ -13,6 +13,7 @@
 
 #include "razerkraken_driver.h"
 #include "razercommon.h"
+#include "razerchromacommon.h"
 
 /*
  * Version Information
@@ -778,7 +779,7 @@ static int razer_kraken_probe(struct hid_device *hdev, const struct hid_device_i
         case USB_DEVICE_ID_RAZER_KRAKEN_V2:
         case USB_DEVICE_ID_RAZER_KRAKEN_ULTIMATE:
         case USB_DEVICE_ID_RAZER_KRAKEN_V3_PRO:
-    case USB_DEVICE_ID_RAZER_KRAKEN_V3_PRO_WIRED:
+        case USB_DEVICE_ID_RAZER_KRAKEN_V3_PRO_WIRED:
         case USB_DEVICE_ID_RAZER_KRAKEN_KITTY_V2:
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_effect_none);            // No effect
             CREATE_DEVICE_FILE(&hdev->dev, &dev_attr_matrix_effect_spectrum);        // Spectrum effect
@@ -883,9 +884,9 @@ static const struct hid_device_id razer_devices[] = {
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_V2) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_ULTIMATE) },
+    { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_KITTY_V2) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_V3_PRO) },
     { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_V3_PRO_WIRED) },
-    { HID_USB_DEVICE(USB_VENDOR_ID_RAZER,USB_DEVICE_ID_RAZER_KRAKEN_KITTY_V2) },
     { 0 }
 };
 
