@@ -227,8 +227,9 @@ static ssize_t razer_attr_read_device_type(struct device *dev, struct device_att
         device_type = "Razer Kraken V3 Pro\n";
         break;
 
-    case USB_DEVICE_ID_RAZER_KRAKEN_V3_PRO_WIRED
+    case USB_DEVICE_ID_RAZER_KRAKEN_V3_PRO_WIRED:
         device_type = "USB COMPOSITE VCOM\n"
+        break;
 
     default:
         device_type = "Unknown Device\n";
