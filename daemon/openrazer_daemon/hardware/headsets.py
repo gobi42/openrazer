@@ -234,3 +234,44 @@ class RazerKrakenv3Pro(__RazerDevice):
             _dbus_chroma.set_breath_dual_effect(self, *args)
         elif effect == 'breathTriple':
             _dbus_chroma.set_breath_triple_effect(self, *args)
+
+class RazerKrakenv3ProWired(__RazerDevice):
+    """
+    Class for the Razer Kraken v3 Pro wired
+    """
+    EVENT_FILE_REGEX = re.compile(r'.*Razer_Kraken_v3_Pro_wired+-event-if03')
+
+    USB_VID = 0x1532
+    USB_PID = 0x052d
+    METHODS = ['get_device_type_headset',
+               'set_static_effect', 'set_spectrum_effect', 'set_none_effect', 'set_breath_single_effect', 'set_breath_dual_effect', 'set_breath_triple_effect',
+               'set_custom_kraken']
+
+    DEVICE_IMAGE = "https://assets.razerzone.com/eeimages/support/products/729/729_kraken_71_v2.png"
+
+    def _suspend_device(self):
+        self.suspend_args.clear()
+        self.suspend_args['effect'] = self.zone["backlight"]["effect"]
+        if self.suspend_args['effect'] == "breathDual":
+            self.suspend_args['args'] = self.zone["backlight"]["colors"][0:6]
+        elif self.suspend_args['effect'] == "breathTriple":
+            self.suspend_args['args'] = self.zone["backlight"]["colors"][0:9]
+        else:
+            self.suspend_args['args'] = self.zone["backlight"]["colors"][0:3]
+
+        _dbus_chroma.set_none_effect(self)
+
+    def _resume_device(self):
+        effect = self.suspend_args.get('effect', '')
+        args = self.suspend_args.get('args', [])
+
+        if effect == 'spectrum':
+            _dbus_chroma.set_spectrum_effect(self)
+        elif effect == 'static':
+            _dbus_chroma.set_static_effect(self, *args)
+        elif effect == 'breathSingle':
+            _dbus_chroma.set_breath_single_effect(self, *args)
+        elif effect == 'breathDual':
+            _dbus_chroma.set_breath_dual_effect(self, *args)
+        elif effect == 'breathTriple':
+            _dbus_chroma.set_breath_triple_effect(self, *args)
